@@ -93,8 +93,4 @@ while True:
     lowest_bin = get_item_from_ah(item)
     print("Craft cost: " + str(craft_price))
     print("Lowest bin: " + str(lowest_bin))
-
-
-
-
-
+    
