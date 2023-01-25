@@ -88,11 +88,12 @@ def get_item(item):
 
 
 while True:
-    try:
-        item = input("Please enter name of your item: ")
-        print("Final cost is: " + get_craft_cost(item))
-    except TypeError:
-        print("Error, please try again")
+    item = input("Please enter name of your item: ")
+    craft_price = get_craft_cost(item)
+    lowest_bin = get_item_from_ah(item)
+    print("Craft cost: " + str(craft_price))
+    print("Lowest bin: " + str(lowest_bin))
+
 
 
 
