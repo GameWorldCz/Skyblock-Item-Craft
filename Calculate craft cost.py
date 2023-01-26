@@ -36,11 +36,11 @@ def get_item_from_bazzar(item):
 
 
 def get_craft_cost(item):
-    item = get_item(item)
+    item = get_item_recipe(item)
     craft_cost = 0
     items_used = []
 
-    for num, x in enumerate(item):
+    for x in item:
         if item[x] != "":
             crafting_item = item[x].split(":")
             named_item = get_item_name(crafting_item[0])
@@ -70,12 +70,11 @@ def get_item_name(item):
 
         for x in items:
             if x["id"] == item:
-                print(f"Renaming {item} to {x['name']}")
                 return x["name"]
     return item
 
 
-def get_item(item):
+def get_item_recipe(item):
     with open("items.json", "r") as f:
         items = json.loads(f.read())
 
@@ -86,9 +85,11 @@ def get_item(item):
 
 
 while True:
-    item = input("Please enter name of your item: ")
-    craft_price = get_craft_cost(item)
-    lowest_bin = get_item_from_ah(item)
-    print("Craft cost: " + str(craft_price))
-    print("Lowest bin: " + str(lowest_bin))
-    
+    try:
+        item = input("Please enter name of your item: ")
+        craft_price = get_craft_cost(item)
+        lowest_bin = get_item_from_ah(item)
+        print("Craft cost: " + str(craft_price))
+        print("Lowest bin: " + str(lowest_bin))
+    except requests.exceptions.ChunkedEncodingError:
+        print("Server error :(")
